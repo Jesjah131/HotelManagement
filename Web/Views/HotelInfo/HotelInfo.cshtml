@@ -1,0 +1,33 @@
+﻿@model Web.Models.HotelInfoModel
+@{
+    ViewBag.Title = "HotelInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HotelInfo</h2>
+
+<p>Hotelname: @Model.Hotelname</p><br />
+<p>Hotelchain: @Model.Hotelchain</p><br />
+<p>Stars: @Model.Stars</p><br />
+<p>Streetname: @Model.Streetname</p><br />
+<p>Country: @Model.Country</p><br />
+<p>Description: @Model.Description</p>
+<p>Rooms: @Model.rooms.Count</p>
+
+    
+    <ul>
+    @{
+        foreach (var item in Model.rooms)
+        {
+            <li>
+               <p>Room number</p>   @item.Room_Number <br></li>
+            <li>
+                <p>Status</p> @item.Room_Status <br></li>
+                <li>
+                    <p>Price</p> @item.Price <br></li>
+                    <li>
+                        <p>Notes</p> @item.Notes <br></li>
+
+                        }
+                        }
+</ul>

@@ -1,0 +1,25 @@
+﻿@model Web.Models.UserLoginModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+
+        @Html.ValidationSummary(true)
+
+            @Html.LabelFor(m => m.Username)
+<br />
+                @Html.TextBoxFor(m => m.Username)
+                @Html.ValidationMessageFor(m => m.Username)
+        <br />
+            @Html.LabelFor(m => m.Password)
+ <br />
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+        <br />
+                <input type="submit" value="Log in"/>
+    }
+

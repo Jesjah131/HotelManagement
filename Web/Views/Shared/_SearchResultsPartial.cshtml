@@ -1,0 +1,23 @@
+﻿@model Web.Models.SearchModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="loginForm">
+    <h2>Search results!</h2>
+    <br />
+    @if (Model.Hotels.Count == 0)
+    {
+        <h3 class="text-error">No items matched your search query!</h3>
+    }
+    else
+    {
+        foreach (var result in Model.Hotels)
+        {
+            <a href='@(Url.Action("HotelInfo", "HotelInfo", new { hotelHID = @result.HID }))'>
+                @result.Hotelname  &nbsp;@result.City &nbsp;@result.Country
+            </a>
+    <br />
+        }
+    }
+</div>

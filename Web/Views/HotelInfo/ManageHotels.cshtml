@@ -1,0 +1,18 @@
+﻿@model Web.Models.AdminProfileModel
+
+@{
+    ViewBag.Title = "AdminProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Här är alla dina hotell!</h2>
+<br />
+@foreach (var item in Model.hotelList)
+{
+    <ul>
+        <li>
+            <a href='@(Url.Action("HotelInfo", "HotelInfo", new { hotelHID = @item.HID }))'>
+                @item.Hotelname&nbsp;&nbsp;<a href='@(Url.Action("RemoveHotel", "HotelInfo", new { hotelHID = @item.HID }))'><p>Remove</p>
+</ul>
+    <br />
+}

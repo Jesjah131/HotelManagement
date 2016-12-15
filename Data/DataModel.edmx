@@ -1,0 +1,637 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HOTELDATABASEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Has_Reservation">
+          <Key>
+            <PropertyRef Name="RID" />
+            <PropertyRef Name="REID" />
+          </Key>
+          <Property Name="RID" Type="int" Nullable="false" />
+          <Property Name="REID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="HID" />
+          </Key>
+          <Property Name="HID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hotelname" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Hotelchain" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Streetname" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Stars" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="HAID" Type="int" />
+        </EntityType>
+        <EntityType Name="HotelAdmin">
+          <Key>
+            <PropertyRef Name="HAID" />
+          </Key>
+          <Property Name="HAID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SSN" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CREATE_TIME" Type="datetime" />
+        </EntityType>
+        <EntityType Name="HotelPics">
+          <Key>
+            <PropertyRef Name="HPID" />
+          </Key>
+          <Property Name="HPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMG" Type="image" />
+          <Property Name="HID" Type="int" />
+        </EntityType>
+        <EntityType Name="Likes_Hotel">
+          <Key>
+            <PropertyRef Name="HID" />
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="HID" Type="int" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="REID" />
+          </Key>
+          <Property Name="REID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Total_Sum" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Check_In" Type="datetime" Nullable="false" />
+          <Property Name="Check_Out" Type="datetime" Nullable="false" />
+          <Property Name="UID" Type="int" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="HID" />
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="HID" Type="int" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="Review_Text" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="TIME_CREATED" Type="datetime" />
+          <Property Name="Rating" Type="int" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Room_Number" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Room_Status" Type="bit" Nullable="false" />
+          <Property Name="FLOOR" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="Price" Type="money" />
+          <Property Name="HID" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" />
+          <Property Name="Postcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="Street" Type="nvarchar" MaxLength="255" />
+          <Property Name="CREATE_TIME" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Has_Reserv__REID__239E4DCF">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
+          <End Role="Has_Reservation" Type="Self.Has_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="REID" />
+            </Principal>
+            <Dependent Role="Has_Reservation">
+              <PropertyRef Name="REID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Has_Reserva__RID__22AA2996">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="Has_Reservation" Type="Self.Has_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RID" />
+            </Principal>
+            <Dependent Role="Has_Reservation">
+              <PropertyRef Name="RID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hotel__HAID__145C0A3F">
+          <End Role="HotelAdmin" Type="Self.HotelAdmin" Multiplicity="0..1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelAdmin">
+              <PropertyRef Name="HAID" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="HAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelPics__HID__173876EA">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="HotelPics" Type="Self.HotelPics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="HID" />
+            </Principal>
+            <Dependent Role="HotelPics">
+              <PropertyRef Name="HID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Likes_Hotel__HID__267ABA7A">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+          <End Role="Likes_Hotel" Type="Self.Likes_Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="HID" />
+            </Principal>
+            <Dependent Role="Likes_Hotel">
+              <PropertyRef Name="HID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Likes_Hotel__UID__276EDEB3">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Likes_Hotel" Type="Self.Likes_Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Likes_Hotel">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservation__UID__1FCDBCEB">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Review__HID__2A4B4B5E">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="HID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="HID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Review__UID__2B3F6F97">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Room__HID__1A14E395">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="HID" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="HID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HOTELDATABASEModelStoreContainer">
+          <EntitySet Name="Has_Reservation" EntityType="Self.Has_Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelAdmin" EntityType="Self.HotelAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelPics" EntityType="Self.HotelPics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Likes_Hotel" EntityType="Self.Likes_Hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Has_Reserv__REID__239E4DCF" Association="Self.FK__Has_Reserv__REID__239E4DCF">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Has_Reservation" EntitySet="Has_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Has_Reserva__RID__22AA2996" Association="Self.FK__Has_Reserva__RID__22AA2996">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Has_Reservation" EntitySet="Has_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hotel__HAID__145C0A3F" Association="Self.FK__Hotel__HAID__145C0A3F">
+            <End Role="HotelAdmin" EntitySet="HotelAdmin" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelPics__HID__173876EA" Association="Self.FK__HotelPics__HID__173876EA">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="HotelPics" EntitySet="HotelPics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Likes_Hotel__HID__267ABA7A" Association="Self.FK__Likes_Hotel__HID__267ABA7A">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Likes_Hotel" EntitySet="Likes_Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Likes_Hotel__UID__276EDEB3" Association="Self.FK__Likes_Hotel__UID__276EDEB3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Likes_Hotel" EntitySet="Likes_Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservation__UID__1FCDBCEB" Association="Self.FK__Reservation__UID__1FCDBCEB">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Review__HID__2A4B4B5E" Association="Self.FK__Review__HID__2A4B4B5E">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Review__UID__2B3F6F97" Association="Self.FK__Review__UID__2B3F6F97">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Room__HID__1A14E395" Association="Self.FK__Room__HID__1A14E395">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Room" EntitySet="Room" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HOTELDATABASEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="HID" />
+          </Key>
+          <Property Name="HID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hotelname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Hotelchain" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Streetname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Stars" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HAID" Type="Int32" />
+          <NavigationProperty Name="HotelAdmin" Relationship="Self.FK__Hotel__HAID__145C0A3F" FromRole="Hotel" ToRole="HotelAdmin" />
+          <NavigationProperty Name="HotelPics" Relationship="Self.FK__HotelPics__HID__173876EA" FromRole="Hotel" ToRole="HotelPics" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK__Review__HID__2A4B4B5E" FromRole="Hotel" ToRole="Review" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK__Room__HID__1A14E395" FromRole="Hotel" ToRole="Room" />
+          <NavigationProperty Name="Users" Relationship="Self.Likes_Hotel" FromRole="Hotel" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="HotelAdmin">
+          <Key>
+            <PropertyRef Name="HAID" />
+          </Key>
+          <Property Name="HAID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SSN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CREATE_TIME" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Hotels" Relationship="Self.FK__Hotel__HAID__145C0A3F" FromRole="HotelAdmin" ToRole="Hotel" />
+        </EntityType>
+        <EntityType Name="HotelPic">
+          <Key>
+            <PropertyRef Name="HPID" />
+          </Key>
+          <Property Name="HPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMG" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="HID" Type="Int32" />
+          <NavigationProperty Name="Hotel" Relationship="Self.FK__HotelPics__HID__173876EA" FromRole="HotelPics" ToRole="Hotel" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="REID" />
+          </Key>
+          <Property Name="REID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Total_Sum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Check_In" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Check_Out" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Reservation__UID__1FCDBCEB" FromRole="Reservation" ToRole="Users" />
+          <NavigationProperty Name="Rooms" Relationship="Self.Has_Reservation" FromRole="Reservation" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="HID" />
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="HID" Type="Int32" Nullable="false" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="Review_Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TIME_CREATED" Type="DateTime" Precision="3" />
+          <Property Name="Rating" Type="Int32" />
+          <NavigationProperty Name="Hotel" Relationship="Self.FK__Review__HID__2A4B4B5E" FromRole="Review" ToRole="Hotel" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Review__UID__2B3F6F97" FromRole="Review" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Room_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Room_Status" Type="Boolean" Nullable="false" />
+          <Property Name="FLOOR" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="HID" Type="Int32" />
+          <NavigationProperty Name="Hotel" Relationship="Self.FK__Room__HID__1A14E395" FromRole="Room" ToRole="Hotel" />
+          <NavigationProperty Name="Reservations" Relationship="Self.Has_Reservation" FromRole="Room" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Postcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CREATE_TIME" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservation__UID__1FCDBCEB" FromRole="Users" ToRole="Reservation" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK__Review__UID__2B3F6F97" FromRole="Users" ToRole="Review" />
+          <NavigationProperty Name="Hotels" Relationship="Self.Likes_Hotel" FromRole="Users" ToRole="Hotel" />
+        </EntityType>
+        <Association Name="FK__Hotel__HAID__145C0A3F">
+          <End Role="HotelAdmin" Type="Self.HotelAdmin" Multiplicity="0..1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HotelAdmin">
+              <PropertyRef Name="HAID" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="HAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HotelPics__HID__173876EA">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="HotelPics" Type="Self.HotelPic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="HID" />
+            </Principal>
+            <Dependent Role="HotelPics">
+              <PropertyRef Name="HID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Review__HID__2A4B4B5E">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="HID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="HID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Room__HID__1A14E395">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="HID" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="HID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservation__UID__1FCDBCEB">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Review__UID__2B3F6F97">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Has_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+        </Association>
+        <Association Name="Likes_Hotel">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Hoteldb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Hotels" EntityType="Self.Hotel" />
+          <EntitySet Name="HotelAdmins" EntityType="Self.HotelAdmin" />
+          <EntitySet Name="HotelPics" EntityType="Self.HotelPic" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Hotel__HAID__145C0A3F" Association="Self.FK__Hotel__HAID__145C0A3F">
+            <End Role="HotelAdmin" EntitySet="HotelAdmins" />
+            <End Role="Hotel" EntitySet="Hotels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HotelPics__HID__173876EA" Association="Self.FK__HotelPics__HID__173876EA">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="HotelPics" EntitySet="HotelPics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Review__HID__2A4B4B5E" Association="Self.FK__Review__HID__2A4B4B5E">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Room__HID__1A14E395" Association="Self.FK__Room__HID__1A14E395">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="Room" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservation__UID__1FCDBCEB" Association="Self.FK__Reservation__UID__1FCDBCEB">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Review__UID__2B3F6F97" Association="Self.FK__Review__UID__2B3F6F97">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="Has_Reservation" Association="Self.Has_Reservation">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Room" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="Likes_Hotel" Association="Self.Likes_Hotel">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HOTELDATABASEModelStoreContainer" CdmEntityContainer="Hoteldb">
+          <EntitySetMapping Name="Hotels">
+            <EntityTypeMapping TypeName="HOTELDATABASEModel.Hotel">
+              <MappingFragment StoreEntitySet="Hotel">
+                <ScalarProperty Name="HID" ColumnName="HID" />
+                <ScalarProperty Name="Hotelname" ColumnName="Hotelname" />
+                <ScalarProperty Name="Hotelchain" ColumnName="Hotelchain" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Streetname" ColumnName="Streetname" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Stars" ColumnName="Stars" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="HAID" ColumnName="HAID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelAdmins">
+            <EntityTypeMapping TypeName="HOTELDATABASEModel.HotelAdmin">
+              <MappingFragment StoreEntitySet="HotelAdmin">
+                <ScalarProperty Name="HAID" ColumnName="HAID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="CREATE_TIME" ColumnName="CREATE_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelPics">
+            <EntityTypeMapping TypeName="HOTELDATABASEModel.HotelPic">
+              <MappingFragment StoreEntitySet="HotelPics">
+                <ScalarProperty Name="HPID" ColumnName="HPID" />
+                <ScalarProperty Name="IMG" ColumnName="IMG" />
+                <ScalarProperty Name="HID" ColumnName="HID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="HOTELDATABASEModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="REID" ColumnName="REID" />
+                <ScalarProperty Name="Total_Sum" ColumnName="Total_Sum" />
+                <ScalarProperty Name="Check_In" ColumnName="Check_In" />
+                <ScalarProperty Name="Check_Out" ColumnName="Check_Out" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="HOTELDATABASEModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="HID" ColumnName="HID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Review_Text" ColumnName="Review_Text" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TIME_CREATED" ColumnName="TIME_CREATED" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="HOTELDATABASEModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="Room_Number" ColumnName="Room_Number" />
+                <ScalarProperty Name="Room_Status" ColumnName="Room_Status" />
+                <ScalarProperty Name="FLOOR" ColumnName="FLOOR" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="HID" ColumnName="HID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HOTELDATABASEModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="CREATE_TIME" ColumnName="CREATE_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Has_Reservation" TypeName="HOTELDATABASEModel.Has_Reservation" StoreEntitySet="Has_Reservation">
+            <EndProperty Name="Reservation">
+              <ScalarProperty Name="REID" ColumnName="REID" />
+            </EndProperty>
+            <EndProperty Name="Room">
+              <ScalarProperty Name="RID" ColumnName="RID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Likes_Hotel" TypeName="HOTELDATABASEModel.Likes_Hotel" StoreEntitySet="Likes_Hotel">
+            <EndProperty Name="Hotel">
+              <ScalarProperty Name="HID" ColumnName="HID" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="UID" ColumnName="UID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

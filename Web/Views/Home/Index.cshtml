@@ -1,0 +1,18 @@
+﻿@model Web.Models.AllHotelModel
+
+@{
+    ViewBag.Title = "ProjectX";
+}
+
+<p>ProjectX in the making. Launching this decade</p>
+
+<ul>
+    @{
+        foreach(var item in Model.AllHotels)
+        {
+<li>
+       @item.Hotelname
+</li>
+    }
+    }
+</ul>
