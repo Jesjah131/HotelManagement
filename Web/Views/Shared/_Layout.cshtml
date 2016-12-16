@@ -4,36 +4,68 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProjectX</title>
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery-1.10.2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.unobtrusive.js")"></script>
+
+    @RenderSection("JavaScript", required: false)
+    @RenderSection("Styles", false)
 
 </head>
 <body>
     @if (User.Identity.IsAuthenticated)
     {
-        <span>
-            @Html.ActionLink("Home", "Index", "Home")
-            &nbsp;&nbsp;       
-        @Html.ActionLink("My Profile", "UserProfile", "UserProfile")
-        &nbsp;&nbsp;
-        @Html.ActionLink("Log out", "LogOut", "Account")
-            &nbsp;&nbsp;
-            @Html.ActionLink("Contact us", "ContactPage", "Contact")
-            &nbsp;&nbsp;
-            @Html.ActionLink("Search hotel", "Search", "Search")
-        </span>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav nav-tabs">
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home")
+                    &nbsp;&nbsp;
+                </li>
+                <li>
+                    @Html.ActionLink("My Profile", "UserProfile", "UserProfile")
+                    &nbsp;&nbsp;
+                </li>
+                <li>
+                    @Html.ActionLink("Log out", "LogOut", "Account")
+                    &nbsp;&nbsp;
+                </li>
+                <li>
+                    @Html.ActionLink("Contact us", "ContactPage", "Contact")
+                    &nbsp;&nbsp;
+                </li>
+                <li>  @Html.ActionLink("Search hotel", "Search", "Search")
+                </li>
+</ul>
+        </div>
     }
     else
     {
-        <span>
-            @Html.ActionLink("Home", "Index", "Home")
-            &nbsp;&nbsp;
-        @Html.ActionLink("Sign in", "Login", "Account")
-        &nbsp;&nbsp;
-        @Html.ActionLink("Create an account", "CreateUser", "Account")
-            &nbsp;&nbsp;
-            @Html.ActionLink("Contact us", "ContactPage", "Contact")
-        </span>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav nav-tabs">
+                <li> @Html.ActionLink("Home", "Index", "Home")</li>
+                &nbsp;&nbsp;
+                <li>
+                    @Html.ActionLink("Sign in", "Login", "Account")
+                    &nbsp;&nbsp;
+                </li>
+                <li>
+                    @Html.ActionLink("Create an account", "CreateUser", "Account")
+                    &nbsp;&nbsp;
+                </li>
+                <li>
+                    @Html.ActionLink("Contact us", "ContactPage", "Contact")
+                </li>
+            </ul>
+        </div>
+
     }
-    
+
     @RenderBody()
 </body>
+
 </html>

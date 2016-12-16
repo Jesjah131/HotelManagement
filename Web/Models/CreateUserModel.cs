@@ -30,13 +30,11 @@ namespace Web.Models
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "First Name is a Required field.")]
-        [DataType(DataType.Text)]
         [Display(Name = "First Name")]
         [StringLength(100, ErrorMessage = "First Name Max Length is 100")]
         public string Firstname { get; set; }
 
         [Required(ErrorMessage = "Last Name is a Required field.")]
-        [DataType(DataType.Text)]
         [Display(Name = "Last Name")]
         [StringLength(100, ErrorMessage = "Last Name Max Length is 100")]
         public string Lastname { get; set; }
@@ -47,7 +45,6 @@ namespace Web.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "City is a Required field.")]
-        [DataType(DataType.Text)]
         [Display(Name = "City")]
         [StringLength(100, ErrorMessage = "City Max Length is 100")]
         public string City { get; set; }

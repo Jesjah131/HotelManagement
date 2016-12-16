@@ -5,23 +5,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>HotelAdminLogin</h2>
+<h2>Login för administratörer</h2>
 
 @using (Html.BeginForm("HotelAdminLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
 {
 
     @Html.ValidationSummary(true)
-
-    @Html.LabelFor(m => m.Username)
-    <br />
-    @Html.TextBoxFor(m => m.Username)
-    @Html.ValidationMessageFor(m => m.Username)
-    <br />
-    @Html.LabelFor(m => m.Password)
-    <br />
-    @Html.PasswordFor(m => m.Password)
-    @Html.ValidationMessageFor(m => m.Password)
-    <br />
-    <input type="submit" value="Log in" />
+    <div class="container" style="float: left;">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Användarnamn:</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Användarnamn" })
+                    @Html.ValidationMessageFor(m => m.Username)
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Lösenord:</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Lösenord" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label><input type="checkbox"> Kom ihåg mig</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Logga in" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
 

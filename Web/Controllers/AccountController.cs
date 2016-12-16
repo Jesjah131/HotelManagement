@@ -21,6 +21,7 @@ namespace Web.Controllers
 
         public ActionResult Login(UserLoginModel model)
         {
+            ModelState.Clear();
             if (ModelState.IsValid)
             {
 
@@ -29,15 +30,16 @@ namespace Web.Controllers
                 var user = UserRepository.LoginUser(model.Username, model.Password);
 
                 if (user != null)
-                {                 
+                {
                     FormsAuthentication.SetAuthCookie(model.Username, false);
                     return RedirectToAction("UserProfile", "UserProfile");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("", "Fel på användarnamn eller lösenord.");
                     return View();
                 }
+
             //}
 
 
@@ -80,7 +82,7 @@ namespace Web.Controllers
             UserRepository rep = new UserRepository();
 
             rep.CreateUser(user);
-
+            ModelState.Clear();
             return RedirectToAction("Login", "Account");
         }
 
