@@ -200,6 +200,7 @@
     <Content Include="Views\Shared\_SearchResultsPartial.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\HotelInfo\ManageHotels.cshtml" />
+    <Content Include="Views\Account\CreateNewUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

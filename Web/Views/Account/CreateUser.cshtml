@@ -4,18 +4,12 @@
     ViewBag.Title = "CreateUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section JavaScript
-{
-    <script type="text/javascript" src="@Url.Content("/Scripts/jquery-1.10.2.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.unobtrusive.js")"></script>
-}
+
 <body>
 
 
-    @using (Html.BeginForm("CreateNewUser", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+    @using (Html.BeginForm("CreateNewUser", "Account"))
     {
-    @Html.ValidationSummary(true)
         <div class="container" style="float: left;">
             <div class="form-group">
                 <label class="control-label col-sm-2">Användarnamn:</label>
@@ -115,9 +109,10 @@
                     </div>
                 </div>
             </div>
+            <br />
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <input type="submit" value="Create account" class="btn btn-default" />
+                    <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
         </div>

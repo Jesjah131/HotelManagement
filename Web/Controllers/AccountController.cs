@@ -60,36 +60,54 @@ namespace Web.Controllers
         {
             return View();
         }
-
+        
+        [HttpPost]
         public ActionResult CreateNewUser(CreateUserModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(model);
+                try
+                {
+                    UserRepository rep = new UserRepository();
+
+                    User user = new User();
+
+                    user.Username = model.Username;
+                    user.Password = model.Password;
+                    user.Firstname = model.Firstname;
+                    user.Lastname = model.Lastname;
+                    user.Email = model.Email;
+                    user.City = model.City;
+                    user.Postcode = model.Postcode;
+                    user.Street = model.Street;
+
+                    var userr = User.Identity.Name;
+
+                    rep.CreateUser(user);
+
+                    ViewBag.Message = "Success!, your username is " + model.Username;
+                }
+                catch
+                {
+                    ViewBag.Message = "Failed to create user";
+                }
             }
 
-            var user = new Data.User();
+            return View();
 
-            user.Username = model.Username;
-            user.Password = model.Password;
-            user.Firstname = model.Firstname;
-            user.Lastname = model.Lastname;
-            user.Email = model.Email;
-            user.City = model.City;
-            user.Postcode = model.Postcode;
-            user.Street = model.Street;
+        }
 
-            UserRepository rep = new UserRepository();
+        [HttpPost]
+        public JsonResult CheckIfUsernameExists(string Username)
+        {
+            var user = UserRepository.DoUserNameExists(Username);
 
-            rep.CreateUser(user);
-            ModelState.Clear();
-            return RedirectToAction("Login", "Account");
+            return Json(user);
         }
 
 
         public ActionResult HotelAdminLogin(UserLoginModel model)
         {
-
             if (ModelState.IsValid)
             {
        

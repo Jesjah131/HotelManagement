@@ -64,5 +64,20 @@ namespace Data
                 return result != null ? result.UID : -1;
             }
         }
+
+        public static bool DoUserNameExists(string Username)
+        {
+            Hoteldb db = new Hoteldb();
+
+            var userexists = db.Users.Count(x => x.Username == Username);
+            if (userexists == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

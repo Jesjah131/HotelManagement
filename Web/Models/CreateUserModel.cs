@@ -14,7 +14,7 @@ namespace Web.Models
         [Required]
         [Display(Name = "User name")]
         [RegularExpression(@"[^\s]+", ErrorMessage = "Username is required and must be properly formatted.")]
-        [Remote("CheckIfUsernameExists", "Image", HttpMethod = "POST", ErrorMessage = "User name already exists. Please enter a different user name.")]
+        [Remote("CheckIfUsernameExists", "Account", HttpMethod = "POST", ErrorMessage = "User name already exists. Please enter a different user name.")]
         public string Username { get; set; }
 
         [Display(Name = "Password")]
