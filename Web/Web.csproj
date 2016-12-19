@@ -173,6 +173,7 @@
     <Compile Include="Models\AllHotelModel.cs" />
     <Compile Include="Models\CreateUserModel.cs" />
     <Compile Include="Models\HotelInfoModel.cs" />
+    <Compile Include="Models\ReservationModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

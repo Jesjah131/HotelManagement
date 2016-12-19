@@ -3,31 +3,45 @@
     ViewBag.Title = "HotelInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container-fluid text-center" style="background-color:white">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+        </div>
+        <div class="col-sm-8 text-left" style="background-color:darkgrey; height: 500px;">
+            <h2>@Model.Hotelname</h2><br />
+            <p>Hotellkedja: @Model.Hotelchain</p><br />
+            <p>Stjärnor: </p>@{
+                for (int i = 0; i < Model.Stars.Value; i++)
+                {
+<i class="glyphicon glyphicon-star"></i>
+                }
+            }
+            <p>Gata: @Model.Streetname</p><br />
+            <p>Land: @Model.Country</p><br />
+            <p>Beskrivning: @Model.Description</p>
 
-<h2>HotelInfo</h2>
-
-<p>Hotelname: @Model.Hotelname</p><br />
-<p>Hotelchain: @Model.Hotelchain</p><br />
-<p>Stars: @Model.Stars</p><br />
-<p>Streetname: @Model.Streetname</p><br />
-<p>Country: @Model.Country</p><br />
-<p>Description: @Model.Description</p>
-<p>Rooms: @Model.rooms.Count</p>
-
+                <p>Antal rum: @Model.rooms.Count</p>
+                
+            <div class="col-sm-3">
+                <div class="container">
+                    <p>Incheckning: </p>
+                    <p>Utcheckning: </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 sidenav" style="background-color:white">
+            <div class="well-sm">
+                <iframe width="200"
+                        height="200"
+                        frameborder="1" style="border:1px; border-radius: 25px;"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyABsNWdrMAY95K4OQvVGTUJ-GEtWhOKaHk
+    &q=Klassikstadt+Frankfurt,Germany" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
     
-    <ul>
-    @{
-        foreach (var item in Model.rooms)
-        {
-            <li>
-               <p>Room number</p>   @item.Room_Number <br></li>
-            <li>
-                <p>Status</p> @item.Room_Status <br></li>
-                <li>
-                    <p>Price</p> @item.Price <br></li>
-                    <li>
-                        <p>Notes</p> @item.Notes <br></li>
-
-                        }
-                        }
-</ul>
+    
