@@ -1,10 +1,38 @@
 ﻿@model Web.Models.ReservationModel
 
 
-<div class="container" style="background-color:#cfcfcf; border-radius: 25px; padding-bottom: 1cm;">
-    <h2>Sök efter ledigt rum</h2>
-    <p>Incheckning: </p>
-    @Html.EditorFor(model => model.Check_In, new { htmlAttributes = new { @class = "form-control" } })
-    <p>Utcheckning: </p>
-    @Html.EditorFor(model => model.Check_Out, new { htmlAttributes = new { @class = "form-control" } })
-</div>
+    <div class="container" style="background-color:#cfcfcf; border-radius: 25px; padding-bottom: 1cm;">
+        <h3>Sök efter ledigt rum</h3>
+        <p>Incheckning: </p>
+        @Html.TextBoxFor(model => model.Check_In, new { @class = "form-control", @id = "TextBox1" })
+        <p>Utcheckning: </p>
+        @Html.TextBoxFor(model => model.Check_Out, new { @class = "form-control", @id = "TextBox2" })
+
+        <label>Antal nätter: </label> <label type="text" id="TextBox3"></label>
+        <br />
+        <input type="submit" value="Sök" class="btn btn-default" />
+    </div>
+
+<script>
+    $("#TextBox1").datepicker({
+        minDate: 0,
+        maxDate: '+1Y+6M',
+        onSelect: function (dateStr) {
+            var min = $(this).datepicker('getDate'); // Get selected date
+            $("#TextBox2").datepicker('option', 'minDate', min || '0'); // Set other min, default to today
+        }
+    });
+
+    $("#TextBox2").datepicker({
+        minDate: '0',
+        maxDate: '+1Y+6M',
+        onSelect: function (dateStr) {
+            var max = $(this).datepicker('getDate'); // Get selected date
+            $('#datepicker').datepicker('option', 'maxDate', max || '+1Y+6M'); // Set other max, default to +18 months
+            var start = $("#TextBox1").datepicker("getDate");
+            var end = $("#TextBox2").datepicker("getDate");
+            var days = (end - start) / (1000 * 60 * 60 * 24);
+            $("#TextBox3").text(days);
+        }
+    });
+</script>

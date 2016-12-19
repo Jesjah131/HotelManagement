@@ -3,6 +3,10 @@
     ViewBag.Title = "HotelInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section JavaScript{
+    <script type="text/javascript" src="@Url.Content("/Scripts/mainscript.js")"></script>
+     }
 <div class="container-fluid text-center" style="background-color:white">
     <div class="row content">
         <div class="col-sm-2 sidenav">
@@ -35,7 +39,7 @@
                         height="200"
                         frameborder="1" style="border:1px; border-radius: 25px;"
                         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyABsNWdrMAY95K4OQvVGTUJ-GEtWhOKaHk
-    &q=Klassikstadt+Frankfurt,Germany" allowfullscreen></iframe>
+    &q=@Model.Streetname+@Model.City,@Model.Country" allowfullscreen></iframe>
             </div>
         </div>
     </div>

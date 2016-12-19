@@ -12,10 +12,8 @@ namespace Web.Models
 
         public string Total_sum { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime Check_In { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime Check_Out { get; set; }
 
         public int UID { get; set; }
@@ -23,5 +21,10 @@ namespace Web.Models
         public int RID { get; set; }
 
         public bool Status { get; set; }
+
+        public TimeSpan compareDates()
+        {
+            return Check_Out.Subtract(Check_In.Date);
+        }
     }
 }
