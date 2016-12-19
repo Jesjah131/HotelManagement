@@ -1,0 +1,10 @@
+﻿@model Web.Models.ReservationModel
+
+
+<div class="container" style="background-color:#cfcfcf; border-radius: 25px; padding-bottom: 1cm;">
+    <h2>Sök efter ledigt rum</h2>
+    <p>Incheckning: </p>
+    @Html.EditorFor(model => model.Check_In, new { htmlAttributes = new { @class = "form-control" } })
+    <p>Utcheckning: </p>
+    @Html.EditorFor(model => model.Check_Out, new { htmlAttributes = new { @class = "form-control" } })
+</div>

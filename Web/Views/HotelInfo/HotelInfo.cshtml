@@ -10,7 +10,7 @@
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
         </div>
-        <div class="col-sm-8 text-left" style="background-color:darkgrey; height: 500px;">
+        <div class="col-sm-8 text-left" style="background-color:darkgrey; height: 900px;">
             <h2>@Model.Hotelname</h2><br />
             <p>Hotellkedja: @Model.Hotelchain</p><br />
             <p>Stjärnor: </p>@{
@@ -26,10 +26,7 @@
                 <p>Antal rum: @Model.rooms.Count</p>
                 
             <div class="col-sm-3">
-                <div class="container">
-                    <p>Incheckning: </p>
-                    <p>Utcheckning: </p>
-                </div>
+                    @Html.Partial("~/Views/Shared/_ReservationSearchPartial.cshtml", new Web.Models.ReservationModel())
             </div>
         </div>
         <div class="col-sm-2 sidenav" style="background-color:white">
