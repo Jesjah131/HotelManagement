@@ -11,46 +11,54 @@
     <div class="row content">
         <div class="col-sm-2 sidenav">
 
-                <img src="@Url.Content("~/Images/" + @Model.Img_path)" width="200" height="200" class="img-thumbnail" />
-@if (Model.loggedInAdmin == Model.HAID)
-{
-                <p>Ladda upp en bild!</p>
-                using (Html.BeginForm("UploadImage", "Image", new { hotelId = @Model.HID }, FormMethod.Post,
-        new { enctype = "multipart/form-data" }))
-                {
-                    <input type='file' name='file' id='file' class="form-control" />
-                    <input type="submit" value="Submit" class="form-control" />
-                }
-}
-
         </div>
-        <div class="col-sm-8 text-left" style="background-color:darkgrey; height: 900px;">
-            <h2>@Model.Hotelname</h2><br />
-            <p>Hotellkedja: @Model.Hotelchain</p><br />
-            <p>Stjärnor: </p>@{
-                for (int i = 0; i < Model.Stars.Value; i++)
-                {
-<i class="glyphicon glyphicon-star"></i>
+        <div class="col-sm-8" style="background-color:darkgrey; height: 900px;">
+            <div class="col-sm-4 text-left" style="background-color:darkgrey; height: 900px;">
+                <img src="@Url.Content("~/Images/" + @Model.Img_path)" width="200" height="200" class="img-thumbnail" />
+                @if (Model.loggedInAdmin == Model.HAID)
+            {
+                    <p>Ladda upp en bild!</p>
+                    using (Html.BeginForm("UploadImage", "Image", new { hotelId = @Model.HID }, FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+                    {
+                        <input type='file' name='file' id='file' class="form-control" />
+                        <input type="submit" value="Submit" class="form-control" />
+                    }
                 }
-            }
-            <p>Gata: @Model.Streetname</p><br />
-            <p>Land: @Model.Country</p><br />
-            <p>Beskrivning: @Model.Description</p>
+
+                <h2>@Model.Hotelname</h2><br />
+                <p>Hotellkedja: @Model.Hotelchain</p><br />
+                <p>Stjärnor: </p>@{
+                    for (int i = 0; i < Model.Stars.Value; i++)
+                    {
+                        <i class="glyphicon glyphicon-star"></i>
+                    }
+                }
+                <p>Gata: @Model.Streetname</p><br />
+                <p>Land: @Model.Country</p><br />
+                <p>Beskrivning: @Model.Description</p>
 
                 <p>Antal rum: @Model.rooms.Count</p>
-                
-            <div class="col-sm-3">
-                    @Html.Partial("~/Views/Shared/_ReservationSearchPartial.cshtml", new Web.Models.ReservationModel())
+
+                <div class="col-sm-3">
+
+                </div>
             </div>
-        </div>
-        <div class="col-sm-2 sidenav" style="background-color:white">
-            <div class="well-sm">
-                <iframe width="200"
-                        height="200"
-                        frameborder="1" style="border:1px; border-radius: 25px;"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyABsNWdrMAY95K4OQvVGTUJ-GEtWhOKaHk
+             <div class="col-sm-4 text-left" style="background-color:darkgrey; height: 900px;">
+                 @Html.Partial("~/Views/Shared/_ReservationSearchPartial.cshtml", new Web.Models.ReservationModel())
+             </div>
+                <div class="col-sm-4 text-right" style="background-color:darkgrey; height: 900px;">
+                    <div class="well-sm">
+                        <iframe width="200"
+                                height="200"
+                                frameborder="1" style="border:1px; border-radius: 25px;"
+                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyABsNWdrMAY95K4OQvVGTUJ-GEtWhOKaHk
     &q=@Model.Streetname+@Model.City,@Model.Country" allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
+        <div class="col-sm-2 sidenav" style="background-color:white">
+
         </div>
     </div>
 </div>
