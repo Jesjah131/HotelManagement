@@ -23,8 +23,10 @@ namespace Web.Controllers
             var rep = new HotelRepository();
             var hotel = new Data.Hotel();
             var rooms = new List<Room>();
+            var hotelpic = new Data.HotelPic();
             hotel = rep.GetSpecificHotelInfo(HotelHID);
             rooms = rep.GetAllRoomsFromSpecificHotel(HotelHID);
+            hotelpic = rep.GetHotelImage(HotelHID);
             var model = new HotelInfoModel();
             model.HID = hotel.HID;
             model.Hotelname = hotel.Hotelname;
@@ -36,7 +38,15 @@ namespace Web.Controllers
             model.Description = hotel.Description;
             model.HAID = hotel.HAID;
             model.rooms = rooms;
-            
+            if(hotelpic != null)
+            { 
+            model.Img_path = hotelpic.IMG;
+            }
+            else
+            { 
+            model.Img_path = null;
+            }
+
             return View(model);
         }
 

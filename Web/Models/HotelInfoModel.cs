@@ -17,6 +17,7 @@ namespace Web.Models
         public int? Stars { get; set; }
         public string Description { get; set; }
         public int? HAID { get; set; }
-        public List<Room>  rooms { get; set; }
+        public List<Room>  rooms { get; set; }  
+        public string Img_path { get; set; }
     }
 }

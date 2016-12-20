@@ -15,7 +15,7 @@ namespace Data
     public partial class HotelPic
     {
         public int HPID { get; set; }
-        public byte[] IMG { get; set; }
+        public string IMG { get; set; }
         public Nullable<int> HID { get; set; }
     
         public virtual Hotel Hotel { get; set; }

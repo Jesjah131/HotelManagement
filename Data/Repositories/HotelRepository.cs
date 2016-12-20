@@ -54,6 +54,14 @@ namespace Data.Repositories
             }
         }
 
+        public HotelPic GetHotelImage(int? hid)
+        {
+            using (var context = new Hoteldb())
+            {
+                return context.HotelPics.FirstOrDefault(x => x.HID == hid);
+            }
+        }
+
         
     }
 }

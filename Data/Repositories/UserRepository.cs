@@ -79,5 +79,36 @@ namespace Data
                 return false;
             }
         }
+
+        public void ChangeImage(string imgpath, int hid)
+        {
+            try
+            {
+                using (var context = new Hoteldb())
+                {
+                    HotelPic hotelpic = context.HotelPics.FirstOrDefault(x => x.HID == hid);
+
+                    if(hotelpic == null) { 
+                    HotelPic pic = new HotelPic();
+
+                    pic.IMG = imgpath;
+                    pic.HID = hid;
+
+                    context.HotelPics.Add(pic);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        hotelpic.IMG = imgpath;
+                        context.SaveChanges();
+                    }
+                   
+                }
+            }
+            catch
+            {
+                //Eventuellt felmeddelande
+            }
+        }
     }
 }

@@ -10,21 +10,16 @@ namespace Web.Models
     {
         public int REID { get; set; }
 
+        public int UID { get; set; }
+
+        public int RID { get; set; }
+
         public string Total_sum { get; set; }
 
         public DateTime Check_In { get; set; }
 
         public DateTime Check_Out { get; set; }
 
-        public int UID { get; set; }
-
-        public int RID { get; set; }
-
         public bool Status { get; set; }
-
-        public TimeSpan compareDates()
-        {
-            return Check_Out.Subtract(Check_In.Date);
-        }
     }
 }
