@@ -110,5 +110,15 @@ namespace Data
                 //Eventuellt felmeddelande
             }
         }
+
+        public static int GetAdminId(string username)
+        {
+            using (var context = new Hoteldb())
+            {
+                var result = context.HotelAdmins.FirstOrDefault(x => x.Username == username);
+
+                return result != null ? result.HAID : -1;
+            }
+        }
     }
 }

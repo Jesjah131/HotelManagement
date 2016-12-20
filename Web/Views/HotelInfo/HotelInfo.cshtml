@@ -10,16 +10,19 @@
 <div class="container-fluid text-center" style="background-color:white">
     <div class="row content">
         <div class="col-sm-2 sidenav">
-            <div class="container" style="background-color:#cfcfcf; border-radius: 25px; padding-bottom: 1cm;">
-                <img src="@Url.Content("~/Images/" + @Model.Img_path)" width="200" height="200" class="img-responsive" />
+
+                <img src="@Url.Content("~/Images/" + @Model.Img_path)" width="200" height="200" class="img-thumbnail" />
+@if (Model.loggedInAdmin == Model.HAID)
+{
                 <p>Ladda upp en bild!</p>
-                @using (Html.BeginForm("UploadImage", "Image", new { hotelId = @Model.HID }, FormMethod.Post,
+                using (Html.BeginForm("UploadImage", "Image", new { hotelId = @Model.HID }, FormMethod.Post,
         new { enctype = "multipart/form-data" }))
                 {
                     <input type='file' name='file' id='file' class="form-control" />
                     <input type="submit" value="Submit" class="form-control" />
                 }
-            </div>
+}
+
         </div>
         <div class="col-sm-8 text-left" style="background-color:darkgrey; height: 900px;">
             <h2>@Model.Hotelname</h2><br />

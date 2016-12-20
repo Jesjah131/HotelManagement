@@ -46,6 +46,7 @@ namespace Web.Controllers
             { 
             model.Img_path = null;
             }
+            model.loggedInAdmin = UserRepository.GetAdminId(User.Identity.Name);
 
             return View(model);
         }
